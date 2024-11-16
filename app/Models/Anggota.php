@@ -14,6 +14,8 @@ class Anggota extends Model
     protected $fillable = [
         'nama',
         'umur',
-        'telp'
+        'telp',
+        'email',
+        'password'
     ];
 }

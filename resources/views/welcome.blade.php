@@ -11,6 +11,8 @@
 </head>
 <body>
     <h1>HOME PAGE</h1>
+    <h1>Hello, {{ session()->get('anggota')->nama }}</h1>
     <a href="{{ route('read_data_to_profile') }}" class="btn btn-primary">To Profile Page</a>
+    <a href="{{ route('logout') }}" class="btn btn-danger">Log Out</a>
 </body>
 </html>
