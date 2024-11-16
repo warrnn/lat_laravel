@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProfileController;
@@ -17,11 +18,15 @@ use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home')->middleware('isLogin');
 
 Route::get('/profile', function () {
     return view('profile');
 });
+
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
 
 // GET -> READ
 // POST -> CREATE
@@ -32,3 +37,8 @@ Route::get('/getdata', [ProfileController::class, 'getData'])->name('read_data_t
 Route::post('/postdata', [ProfileController::class, 'postData'])->name('create_data'); // CREATE
 Route::delete('/deletedata/{id}', [ProfileController::class, 'deleteData'])->name('delete_data'); // DELETE
 Route::put('/putdata/{id}', [ProfileController::class, 'putData'])->name('update_data'); // UPDATE
+
+Route::post('/process_login', [LoginController::class, 'login'])->name('process_login');
+Route::get('/process_logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::post('/process_register', [LoginController::class, 'register'])->name('process_register');
