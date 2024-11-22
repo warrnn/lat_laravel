@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PhotoController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Photo;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +19,18 @@ use App\Http\Controllers\ProfileController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $data_foto = Photo::all();
+
+    return view('welcome', ['photos' => $data_foto]);
 })->name('home')->middleware('isLogin');
 
 Route::get('/profile', function () {
     return view('profile');
 });
+
+Route::get('/photo', function () {
+    return view('photo');
+})->name('photo_page');
 
 Route::get('/login', function () {
     return view('login');
@@ -42,3 +50,7 @@ Route::post('/process_login', [LoginController::class, 'login'])->name('process_
 Route::get('/process_logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::post('/process_register', [LoginController::class, 'register'])->name('process_register');
+
+Route::get('/getLiveSearch', [ProfileController::class, 'searchData'])->name('search_data');
+
+Route::post('/uploadPhoto', [PhotoController::class, 'uploadPhoto'])->name('upload_photo');

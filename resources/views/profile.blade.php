@@ -7,10 +7,14 @@
     <title>Document</title>
 
     @include('includes.bootstrap')
+    @include('includes.jquery')
+
+    <script src="{{ asset('js/profileScript.js') }}"></script>
+
     {{-- @vite('resources/css/app.css') --}}
 </head>
 
-<body>
+<body class="container-fluid">
     <h1>PROFILE PAGE</h1>
     <a href="/" class="btn btn-primary">To Home Page</a>
     <!-- <img src="{{ asset('images/bootstrap.png') }}" alt=""> -->
@@ -33,6 +37,11 @@
         <input type="submit" value="Masukan Data" class="btn btn-primary">
     </form>
 
+    <div class="input-group mb-3 ms-auto" style="width: 25%;">
+        <span class="input-group-text" id="basic-addon1">Search</span>
+        <input id="search_name" type="text" class="form-control" placeholder="Search name">
+    </div>
+
     <table class="table">
         <thead>
             <tr>
@@ -43,7 +52,7 @@
                 <th scope="col">Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tbody_profile">
             @foreach($anggota as $a)
             <tr>
                 <th scope="row">{{ $loop->iteration }}</th>
@@ -96,8 +105,6 @@
             @endforeach
         </tbody>
     </table>
-
-    <script src="{{ asset('js/profileScript.js') }}"></script>
 </body>
 
 </html>
